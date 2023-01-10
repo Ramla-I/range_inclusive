@@ -4,7 +4,7 @@
 use core::iter::Step;
 use core::ops::{RangeBounds, Bound, Bound::Included};
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub struct RangeInclusive<Idx: Clone + PartialOrd> {
     pub(crate) start: Idx,
     pub(crate) end: Idx
@@ -36,7 +36,7 @@ impl<Idx: Clone + PartialOrd> RangeInclusive<Idx> {
     }
 
     pub fn is_empty(&self) -> bool {
-        self.end < self.start
+        !(self.start <= self.end)
     }
 
     pub fn contains<U>(&self, item: &U) -> bool
